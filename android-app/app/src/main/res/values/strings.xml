@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">FileWhisper</string>
+    <string name="app_description">AI-Powered Summaries &amp; Chat</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="register">Register</string>
+    <string name="register_link">Don\'t have an account? Register here!</string>
+    <string name="login_link">Already have an account? Login here!</string>
+
+    <string name="my_files">My Files</string>
+    <string name="upload_file">Upload File</string>
+    <string name="upload_file_message">Select a file to upload (.txt or .pdf)</string>
+    <string name="choose_file">Choose File</string>
+    <string name="mock_filename">Some_File.txt</string>
+    <string name="mock_file_created_at">2025–08–21</string>
+
+    <string name="back">Back</string>
+    <string name="style">Style:</string>
+    <string-array name="styles_array">
+        <item>Bullet</item>
+        <item>Paragraph</item>
+    </string-array>
+    <string name="length">Length:</string>
+    <string-array name="length_array">
+        <item>Short</item>
+        <item>Medium</item>
+        <item>Long</item>
+    </string-array>
+    <string name="summary">Summary</string>
+    <string name="mock_summary">This document provides an overview of current market trends in the tech industry.
+Key findings highlight the rapid growth of artificial intelligence, the increasing
+demand for cloud-based solutions, and the shift toward mobile-first applications.
+Challenges include data privacy concerns, rising competition, and the need for
+sustainable business practices. Overall, the outlook remains positive, with
+opportunities for innovation in automation, user experience, and digital security.
+</string>
+    <string name="question_for_model">Question for AI model</string>
+    <string name="mock_chat">Me: what is the main idea of this file?\n\n
+        AI Model: The main idea of this file is to provide a summary of its contents and highlight the key purpose or function it serves.
+    </string>
+    <string name="send">Send</string>
+    <string name="chat">Chat</string>
+</resources>
