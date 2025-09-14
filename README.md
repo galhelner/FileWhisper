@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="file_whisper_logo.jpg" alt="FileWhisper Logo"/>
+  <img src="file_whisper_logo.JPG" alt="FileWhisper Logo"/>
 </p>
 
 **FileWhisper** is an AI-powered application that lets users upload **TXT** or **PDF** files, receive instant **summaries**, and **chat with an AI model** about the file’s content.  
@@ -29,6 +29,7 @@ It’s built with a **FastAPI backend**, a **React/Next.js web frontend**, and a
 ---
 
 ## 📂 Project Structure
+```
 FileWhisper/
 ├── backend/ # FastAPI backend
 │ ├── app/ # API endpoints, services, models
@@ -48,6 +49,7 @@ FileWhisper/
 ├── start.sh # Bash script to start the project (MAC & Linux)
 ├── start.ps1 # PowerShell script to start the project (Windows)
 └── README.md
+```
 
 
 ---
