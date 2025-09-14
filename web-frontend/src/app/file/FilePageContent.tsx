@@ -227,6 +227,7 @@ export default function FileDetailsContent() {
                     Summary Style
                   </label>
                   <select
+                    aria-label="Choose summary style"
                     className="border border-slate-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-slate-50 text-slate-700"
                     value={styleOption}
                     onChange={(e) => setStyleOption(e.target.value)}
@@ -241,6 +242,7 @@ export default function FileDetailsContent() {
                     Summary Length
                   </label>
                   <select
+                    aria-label="Choose summary length"
                     className="border border-slate-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-slate-50 text-slate-700"
                     value={lengthOption}
                     onChange={(e) => setLengthOption(e.target.value)}
@@ -387,8 +389,7 @@ export default function FileDetailsContent() {
               >
                 <textarea
                   rows={1}
-                  style={{ lineHeight: "1rem" }}
-                  className="flex-1 border border-slate-200 rounded-xl px-5 py-5 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white text-slate-800 shadow resize-none overflow-hidden leading-normal"
+                  className="flex-1 border border-slate-200 rounded-xl px-5 py-5 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white text-slate-800 shadow resize-none overflow-hidden leading-4"
                   placeholder="Ask something about this file..."
                   value={question}
                   onChange={(e) => {

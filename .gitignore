@@ -3,6 +3,8 @@
 uploads
 .idea
 node_modules
+*__pycache__
+.hintrc
 
 # dependencies
 /node_modules
