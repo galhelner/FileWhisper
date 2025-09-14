@@ -94,5 +94,10 @@ and automatically open your default browser at http://localhost:3000
 ---
 
 ## 👨‍💻 Author
-**Gal Helner**
+
+**Gal Helner**  
 Built with ❤️ using FastAPI, MongoDB, React, and Android.
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/galhelner)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/galhelner/)
+
