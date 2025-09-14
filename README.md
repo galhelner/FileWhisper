@@ -78,9 +78,9 @@ On **Windows (PowerShell)**:
 and automatically open your default browser at http://localhost:3000
 
 ### 3. Android Frontend App
-* Open android-app-frontent in Android Studio
-* Sync Gradle and run on an emulator or device
-* **Make sure that the backend server is running!** 
+1. Open android-app-frontent in Android Studio
+2. Sync Gradle and run on an emulator or device
+3. **Make sure that the backend server is running!** 
 
 ---
 
