@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    networks:
+      - file_whisper_network
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: galhelner
+      MONGO_INITDB_ROOT_PASSWORD: vu960pbrBu2rBqcN@maincluster
+      MONGO_INITDB_DATABASE: FileWhisperDB
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    container_name: backend
+    build: ./backend
+    networks:
+      - file_whisper_network
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - MONGO_URI=mongodb+srv://galhelner:vu960pbrBu2rBqcN@maincluster.qxevd31.mongodb.net/FileWhisperDB?retryWrites=true&w=majority&appName=MainCluster
+      - MONGO_DB=FileWhisperDB
+      - JWT_SECRET_KEY=supersecret
+      - JWT_ALGORITHM=HS256
+      - JWT_EXPIRE_MINUTES=60
+
+  web-frontend:
+    container_name: web-frontend
+    build: 
+      context: ./web-frontend
+      args:
+         NEXT_PUBLIC_API_BASE_URL: "http://localhost:5000"
+    networks:
+      - file_whisper_network
+    ports:
+      - "3000:3000"
+
+networks:
+  file_whisper_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
