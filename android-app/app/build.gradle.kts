@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.okhttp3.okhttp)
     implementation(libs.material.v190)
+    implementation(libs.androidx.viewpager2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

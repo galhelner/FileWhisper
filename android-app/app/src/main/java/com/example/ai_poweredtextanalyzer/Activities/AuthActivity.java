@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.ai_poweredtextanalyzer.Utils.ApiClient;
 import com.example.ai_poweredtextanalyzer.R;
 
+import java.util.List;
+
 public class AuthActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private Button authButton;
@@ -97,8 +99,11 @@ public class AuthActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // login to the backend server and get JWT access token
-                String token = ApiClient.login(email, password);
+                List<String> result = ApiClient.login(email, password);
+                String token = result.get(0);
+                String full_name = result.get(1);
                 prefs.edit().putString("jwt_token", token).apply();
+                prefs.edit().putString("full_name", full_name).apply();
                 Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                 startActivity(intent);
             } catch (RuntimeException e) {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/summaryFormatLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="17sp"
+        android:text="@string/choose_summary_format"
+        android:layout_marginTop="15dp"/>
+
+    <LinearLayout
+        android:id="@+id/spinnerSection"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summaryFormatLabel"
+        android:padding="16dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginEnd="25dp"
+            android:prompt="@string/style_prompt"/>
+
+        <Spinner
+            android:id="@+id/spinnerLength"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:prompt="@string/length_prompt"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/summaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSection"
+        android:text="@string/summary"
+        android:backgroundTint="@color/purple"
+        android:textSize="16sp"/>
+
+    <ScrollView
+        android:id="@+id/summaryScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summaryButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        android:scrollbars="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/summaryLoading"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                app:indicatorSize="50dp"
+                app:trackThickness="6dp"
+                app:indicatorColor="@color/primaryColorDark"
+                android:indeterminate="true"
+                android:layout_gravity="center"/>
+
+
+            <TextView
+                android:id="@+id/summaryText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:lineSpacingExtra="5dp"
+                android:breakStrategy="simple"
+                android:text="@string/mock_summary"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

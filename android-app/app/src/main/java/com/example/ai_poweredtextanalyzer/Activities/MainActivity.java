@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         ViewGroup root = findViewById(R.id.main);
         View popupView = inflater.inflate(R.layout.profile_popup, root, false);
         Button logoutButton = popupView.findViewById(R.id.logoutButton);
+        TextView profileFullName = popupView.findViewById(R.id.profileFullName);
 
         // Create PopupWindow
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -88,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Show popup anchored to the clicked view
         popupWindow.showAsDropDown(view, 0, 10);
+
+        // set user's full name at the popup
+        String full_name = prefs.getString("full_name", "User");
+        profileFullName.setText(full_name);
 
         // handle logout button click event
         logoutButton.setOnClickListener(v -> {

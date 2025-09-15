@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,11 +33,11 @@ public class ApiClient {
      * Login to the backend server.
      * @param email - user's email address.
      * @param password - user's password.
-     * @return JWT access token for future authentications.
+     * @return A list contains the JWT access token for future authentications and the user's full name.
      * @throws RuntimeException if login failed.
      * @throws InvalidCredentialsException if the login credentials are invalid.
      */
-    public static String login(String email, String password) throws InvalidCredentialsException, RuntimeException {
+    public static List<String> login(String email, String password) throws InvalidCredentialsException, RuntimeException {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
         RequestBody body = RequestBody.create(json, JSON);
@@ -54,8 +55,14 @@ public class ApiClient {
                     String jsonResponse = response.body().string();
                     JSONObject obj = new JSONObject(jsonResponse);
                     String token = obj.getString("token");
-                    Log.d("API", "JWT Token: " + token);
-                    return token;
+                    String full_name = obj.getString("full_name");
+                    Log.d("auth", "JWT Token: " + token);
+
+                    ArrayList<String> result = new ArrayList<>();
+                    result.add(token);
+                    result.add(full_name);
+
+                    return result;
                 } else {
                     throw new RuntimeException("Login succeeded but response body is empty!");
                 }
@@ -359,6 +366,7 @@ public class ApiClient {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
+            Log.i("test", "hello");
             if (response.body() != null) {
                 String jsonResponse = response.body().string();
 

@@ -21,6 +21,9 @@
     <string name="mock_file_created_at">2025–08–21</string>
 
     <string name="back">Back</string>
+    <string name="style_prompt">Select Style</string>
+    <string name="length_prompt">Select Length</string>
+    <string name="choose_summary_format">Choose summary format:</string>
     <string name="style">Style:</string>
     <string-array name="styles_array">
         <item>Bullet</item>
