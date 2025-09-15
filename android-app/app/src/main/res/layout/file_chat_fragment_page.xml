@@ -5,43 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/chatScrollView"
+    <LinearLayout
+        android:id="@+id/chatSection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/chatInputSection"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:padding="4dp"/>
 
-            <TextView
-                android:id="@+id/chatText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-                android:lineSpacingExtra="5dp"
-                android:breakStrategy="simple"/>
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/chatLoading"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            app:indicatorSize="50dp"
+            app:trackThickness="6dp"
+            app:indicatorColor="@color/primaryColorDark"
+            android:indeterminate="true"
+            android:layout_gravity="center"/>
 
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/chatLoading"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:visibility="gone"
-                app:indicatorSize="50dp"
-                app:trackThickness="6dp"
-                app:indicatorColor="@color/primaryColorDark"
-                android:indeterminate="true"
-                android:layout_gravity="center"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatInputSection"
@@ -49,7 +41,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatScrollView"
+        app:layout_constraintTop_toBottomOf="@+id/chatSection"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText

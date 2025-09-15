@@ -4,11 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.ai_poweredtextanalyzer"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.ai_poweredtextanalyzer"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

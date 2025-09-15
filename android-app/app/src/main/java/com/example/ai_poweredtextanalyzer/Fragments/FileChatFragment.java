@@ -1,32 +1,25 @@
 package com.example.ai_poweredtextanalyzer.Fragments;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.ai_poweredtextanalyzer.Adapters.ChatAdapter;
 import com.example.ai_poweredtextanalyzer.Objects.ChatMessage;
 import com.example.ai_poweredtextanalyzer.R;
 import com.example.ai_poweredtextanalyzer.Utils.ApiClient;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-
 import java.util.ArrayList;
 
 public class FileChatFragment extends Fragment {
@@ -35,9 +28,9 @@ public class FileChatFragment extends Fragment {
     String fileID;
     Button sendButton;
     EditText chatQuestionInput;
-    TextView chatText;
-    ScrollView chatScrollView;
     CircularProgressIndicator chatLoading;
+    RecyclerView chatRecycler;
+    ChatAdapter adapter;
 
     public FileChatFragment(FragmentActivity activity, Context context, String fileID) {
         this.activity = activity;
@@ -69,8 +62,7 @@ public class FileChatFragment extends Fragment {
     private void findViews(View view) {
         sendButton = view.findViewById(R.id.sendButton);
         chatQuestionInput = view.findViewById(R.id.chatQuestionInput);
-        chatText = view.findViewById(R.id.chatText);
-        chatScrollView = view.findViewById(R.id.chatScrollView);
+        chatRecycler = view.findViewById(R.id.chatRecycler);
         chatLoading = view.findViewById(R.id.chatLoading);
     }
 
@@ -80,11 +72,11 @@ public class FileChatFragment extends Fragment {
      * @param message - message's content
      */
     private void appendMessage(String sender, String message) {
-        int color = ContextCompat.getColor(context, R.color.primaryColorDark);
-        SpannableString spannableString = new SpannableString(sender + ": " + message + "\n\n");
-        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, sender.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(color), 0, sender.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        chatText.append(spannableString);
+        ChatMessage newMessage = new ChatMessage(sender, message);
+        adapter.addMessage(newMessage);
+
+        // scroll down to the new message
+        chatRecycler.smoothScrollToPosition(adapter.getItemCount() - 1);
     }
 
     /**
@@ -95,9 +87,10 @@ public class FileChatFragment extends Fragment {
             try {
                 ArrayList<ChatMessage> chatMessages = ApiClient.getChatHistory(context, fileID);
                 activity.runOnUiThread(() -> {
-                    for (ChatMessage message : chatMessages) {
-                        appendMessage(message.getSender(), message.getText());
-                    }
+                    // set chat recycler adapter
+                    adapter = new ChatAdapter(chatMessages);
+                    chatRecycler.setLayoutManager(new LinearLayoutManager(context));
+                    chatRecycler.setAdapter(adapter);
                 });
             } catch (Exception e) {
                 if (e.getMessage() != null) {
@@ -117,7 +110,6 @@ public class FileChatFragment extends Fragment {
         chatQuestionInput.setText("");
 
         chatLoading.setVisibility(View.VISIBLE);
-        chatScrollView.post(() -> chatScrollView.fullScroll(View.FOCUS_DOWN));
 
         new Thread(() -> {
             try {
