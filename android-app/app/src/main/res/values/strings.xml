@@ -44,9 +44,7 @@ sustainable business practices. Overall, the outlook remains positive, with
 opportunities for innovation in automation, user experience, and digital security.
 </string>
     <string name="question_for_model">Question for AI model</string>
-    <string name="mock_chat">Me: what is the main idea of this file?\n\n
-        AI Model: The main idea of this file is to provide a summary of its contents and highlight the key purpose or function it serves.
-    </string>
+    <string name="mock_message">Hello World!</string>
     <string name="send">Send</string>
     <string name="chat">Chat</string>
 </resources>
