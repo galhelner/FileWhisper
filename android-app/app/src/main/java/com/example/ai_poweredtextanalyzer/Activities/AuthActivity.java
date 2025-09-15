@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Patterns;
 import android.widget.Toast;
+
+import com.example.ai_poweredtextanalyzer.Utils.ApiClient;
+import com.example.ai_poweredtextanalyzer.R;
 
 public class AuthActivity extends AppCompatActivity {
     private SharedPreferences prefs;
@@ -54,10 +57,17 @@ public class AuthActivity extends AppCompatActivity {
 
         // handle register link click event
         toggleLink.setOnClickListener(v -> {
-            mode = Mode.REGISTER;
-            authButton.setText(R.string.register);
-            toggleLink.setText(R.string.login_link);
-            fullNameInput.setVisibility(View.VISIBLE);
+            if (mode == Mode.LOGIN) {
+                mode = Mode.REGISTER;
+                authButton.setText(R.string.register);
+                toggleLink.setText(R.string.login_link);
+                fullNameInput.setVisibility(View.VISIBLE);
+            } else {
+                mode = Mode.LOGIN;
+                authButton.setText(R.string.login);
+                toggleLink.setText(R.string.register_link);
+                fullNameInput.setVisibility(View.GONE);
+            }
         });
     }
 

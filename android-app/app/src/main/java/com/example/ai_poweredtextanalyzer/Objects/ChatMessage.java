@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Objects;
 
 /**
  * This class represent a single message of the chat between the user and the AI Model.

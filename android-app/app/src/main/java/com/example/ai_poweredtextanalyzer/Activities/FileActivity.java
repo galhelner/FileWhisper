@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +20,10 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.example.ai_poweredtextanalyzer.Utils.ApiClient;
+import com.example.ai_poweredtextanalyzer.Objects.ChatMessage;
+import com.example.ai_poweredtextanalyzer.R;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import java.util.ArrayList;
 

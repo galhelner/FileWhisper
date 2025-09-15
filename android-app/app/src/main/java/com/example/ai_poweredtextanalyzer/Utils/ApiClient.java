@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Utils;
 
 import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
@@ -6,6 +6,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import androidx.annotation.NonNull;
+
+import com.example.ai_poweredtextanalyzer.Exceptions.InvalidCredentialsException;
+import com.example.ai_poweredtextanalyzer.Objects.ChatMessage;
+import com.example.ai_poweredtextanalyzer.Objects.File;
+import com.example.ai_poweredtextanalyzer.Exceptions.UserAlreadyExistsException;
+
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;

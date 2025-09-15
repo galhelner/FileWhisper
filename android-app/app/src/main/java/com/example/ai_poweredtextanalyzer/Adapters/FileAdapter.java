@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.ai_poweredtextanalyzer.Activities.FileActivity;
+import com.example.ai_poweredtextanalyzer.Objects.File;
+import com.example.ai_poweredtextanalyzer.R;
+
 import java.util.ArrayList;
 
 public class FileAdapter extends BaseAdapter {

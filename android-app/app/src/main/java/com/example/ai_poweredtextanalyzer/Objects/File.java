@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Objects;
 
 import android.util.Log;
 import java.text.ParseException;

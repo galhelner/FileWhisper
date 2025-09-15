@@ -1,4 +1,4 @@
-package com.example.ai_poweredtextanalyzer;
+package com.example.ai_poweredtextanalyzer.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -22,6 +22,11 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ai_poweredtextanalyzer.Utils.ApiClient;
+import com.example.ai_poweredtextanalyzer.Objects.File;
+import com.example.ai_poweredtextanalyzer.Adapters.FileAdapter;
+import com.example.ai_poweredtextanalyzer.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Objects;
