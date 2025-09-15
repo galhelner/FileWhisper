@@ -5,6 +5,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="full_name">Full Name</string>
+    <string name="profile">Profile</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="register">Register</string>
@@ -12,6 +13,7 @@
     <string name="login_link">Already have an account? Login here!</string>
 
     <string name="my_files">My Files</string>
+    <string name="file">File</string>
     <string name="upload_file">Upload File</string>
     <string name="upload_file_message">Select a file to upload (.txt or .pdf)</string>
     <string name="choose_file">Choose File</string>

@@ -9,8 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,7 +28,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
-    private ImageButton logoutButton;
+    private ImageButton profileButton;
     private GridView myFilesGrid;
     private FileAdapter adapter;
     private FloatingActionButton uploadFileButton;
@@ -48,6 +54,36 @@ public class MainActivity extends AppCompatActivity {
         // initialize the file picker
         initFilePicker();
 
+        // handle profile button click event
+        profileButton.setOnClickListener(this::openProfilePopup);
+
+        // handle upload new file button
+        uploadFileButton.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setTitle(R.string.upload_file)
+                .setMessage(R.string.upload_file_message)
+                .setPositiveButton(R.string.choose_file, (dialog, which) -> openFilePicker())
+                .show());
+    }
+
+    private void openProfilePopup(View view) {
+        // Inflate popup layout
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup root = findViewById(R.id.main);
+        View popupView = inflater.inflate(R.layout.profile_popup, root, false);
+        Button logoutButton = popupView.findViewById(R.id.logoutButton);
+
+        // Create PopupWindow
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // Add shadow/elevation
+        popupWindow.setElevation(20);
+
+        // Show popup anchored to the clicked view
+        popupWindow.showAsDropDown(view, 0, 10);
+
         // handle logout button click event
         logoutButton.setOnClickListener(v -> {
             // remove access token from shared preferences
@@ -57,13 +93,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AuthActivity.class);
             startActivity(intent);
         });
-
-        // handle upload new file button
-        uploadFileButton.setOnClickListener(v -> new AlertDialog.Builder(this)
-                .setTitle(R.string.upload_file)
-                .setMessage(R.string.upload_file_message)
-                .setPositiveButton(R.string.choose_file, (dialog, which) -> openFilePicker())
-                .show());
     }
 
     /**
@@ -82,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
      * Find all views references.
      */
     private void findViews() {
-        logoutButton = findViewById(R.id.logoutButton);
+        profileButton = findViewById(R.id.profileButton);
         myFilesGrid = findViewById(R.id.myFilesGrid);
         uploadFileButton = findViewById(R.id.uploadFileButton);
     }
