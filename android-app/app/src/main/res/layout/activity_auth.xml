@@ -51,6 +51,8 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/input_background"
+            android:padding="10dp"
             android:autofillHints="emailAddress"
             android:hint="@string/full_name"
             android:inputType="textEmailAddress"

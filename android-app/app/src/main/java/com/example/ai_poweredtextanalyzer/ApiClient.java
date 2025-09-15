@@ -28,8 +28,9 @@ public class ApiClient {
      * @param password - user's password.
      * @return JWT access token for future authentications.
      * @throws RuntimeException if login failed.
+     * @throws InvalidCredentialsException if the login credentials are invalid.
      */
-    public static String login(String email, String password) throws RuntimeException {
+    public static String login(String email, String password) throws InvalidCredentialsException, RuntimeException {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
         RequestBody body = RequestBody.create(json, JSON);
@@ -40,17 +41,23 @@ public class ApiClient {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.body() != null) {
-                String jsonResponse = response.body().string(); // JWT JSON
+            int statusCode = response.code();
 
-                // Parse the JSON
-                JSONObject obj = new JSONObject(jsonResponse);
-                String token = obj.getString("token");
-                Log.d("API", "JWT Token: " + token);
-
-                return token;
-            } else {
-                throw new RuntimeException("Failed to login!");
+            if (statusCode == 200) { // Success
+                if (response.body() != null) {
+                    String jsonResponse = response.body().string();
+                    JSONObject obj = new JSONObject(jsonResponse);
+                    String token = obj.getString("token");
+                    Log.d("API", "JWT Token: " + token);
+                    return token;
+                } else {
+                    throw new RuntimeException("Login succeeded but response body is empty!");
+                }
+            } else if (statusCode == 401) { // Invalid credentials
+                throw new InvalidCredentialsException("Invalid email or password");
+            } else { // Other errors
+                String errorBody = response.body() != null ? response.body().string() : "No details";
+                throw new RuntimeException("Login failed with status " + statusCode + ": " + errorBody);
             }
         } catch (IOException | JSONException e) {
             throw new RuntimeException("Failed to login", e);
@@ -64,8 +71,9 @@ public class ApiClient {
      * @param password - user's password.
      * @return JWT access token for future authentications.
      * @throws RuntimeException if registration failed.
+     * @throws UserAlreadyExistsException if the user is already exists in the database.
      */
-    public static String register(String fullName, String email, String password) throws RuntimeException {
+    public static String register(String fullName, String email, String password) throws UserAlreadyExistsException, RuntimeException {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"full_name\":\"" + fullName + "\","
                 + "\"email\":\"" + email + "\","
@@ -78,17 +86,23 @@ public class ApiClient {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.body() != null) {
-                String jsonResponse = response.body().string(); // JWT JSON
+            int statusCode = response.code();
 
-                // Parse the JSON
-                JSONObject obj = new JSONObject(jsonResponse);
-                String token = obj.getString("token");
-                Log.d("API", "JWT Token: " + token);
-
-                return token;
-            } else {
-                throw new RuntimeException("Failed to register!");
+            if (statusCode == 201) { // Success
+                if (response.body() != null) {
+                    String jsonResponse = response.body().string();
+                    JSONObject obj = new JSONObject(jsonResponse);
+                    String token = obj.getString("token");
+                    Log.d("API", "JWT Token: " + token);
+                    return token;
+                } else {
+                    throw new RuntimeException("Registration succeeded but response body is empty!");
+                }
+            } else if (statusCode == 400) { // User already exists
+                throw new UserAlreadyExistsException("User with this email already exists");
+            } else { // Other errors
+                String errorBody = response.body() != null ? response.body().string() : "No details";
+                throw new RuntimeException("Registration failed with status " + statusCode + ": " + errorBody);
             }
         } catch (IOException | JSONException e) {
             throw new RuntimeException("Failed to register", e);

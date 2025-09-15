@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Patterns;
+import android.widget.Toast;
 
 public class AuthActivity extends AppCompatActivity {
     private SharedPreferences prefs;
@@ -76,6 +78,12 @@ public class AuthActivity extends AppCompatActivity {
     private void login() {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
+
+        // validate inputs
+        if (!validateInputs(email, password)) {
+            return;
+        }
+
         new Thread(() -> {
             try {
                 // login to the backend server and get JWT access token
@@ -85,7 +93,10 @@ public class AuthActivity extends AppCompatActivity {
                 startActivity(intent);
             } catch (RuntimeException e) {
                 if (e.getMessage() != null) {
-                    Log.e("test", e.getMessage());
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("auth", e.getMessage());
+                    });
                 }
             }
         }).start();
@@ -98,6 +109,16 @@ public class AuthActivity extends AppCompatActivity {
         String fullName = fullNameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
+
+        // validate inputs
+        if (fullName.isEmpty()) {
+            Toast.makeText(this, "Please enter full name!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!validateInputs(email, password)) {
+            return;
+        }
+
         new Thread(() -> {
             try {
                 // register as new user at the backend server and get JWT access token
@@ -107,9 +128,37 @@ public class AuthActivity extends AppCompatActivity {
                 startActivity(intent);
             } catch (RuntimeException e) {
                 if (e.getMessage() != null) {
-                    Log.e("test", e.getMessage());
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("auth", e.getMessage());
+                    });
                 }
             }
         }).start();
+    }
+
+    private boolean validateInputs(String email, String password) {
+        // check for empty values
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please enter email and password!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // validate email address
+        boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (!isEmailValid) {
+            Toast.makeText(this, "Email address is invalid!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // validate password
+        boolean isValidPassword = password.length() >= 6;
+        if (!isValidPassword) {
+            Toast.makeText(this, "Password must be at least 6 characters long!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        // everything is ok (=
+        return true;
     }
 }
