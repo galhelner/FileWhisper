@@ -10,9 +10,9 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: galhelner
-      MONGO_INITDB_ROOT_PASSWORD: vu960pbrBu2rBqcN@maincluster
-      MONGO_INITDB_DATABASE: FileWhisperDB
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
       - mongo_data:/data/db
 
@@ -27,11 +27,11 @@ services:
       - mongo
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - MONGO_URI=mongodb+srv://galhelner:vu960pbrBu2rBqcN@maincluster.qxevd31.mongodb.net/FileWhisperDB?retryWrites=true&w=majority&appName=MainCluster
-      - MONGO_DB=FileWhisperDB
-      - JWT_SECRET_KEY=supersecret
-      - JWT_ALGORITHM=HS256
-      - JWT_EXPIRE_MINUTES=60
+      - MONGO_URI=${MONGO_URI}
+      - MONGO_DB=${MONGO_DB}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=${JWT_ALGORITHM}
+      - JWT_EXPIRE_MINUTES=${JWT_EXPIRE_MINUTES}
 
   web-frontend:
     container_name: web-frontend

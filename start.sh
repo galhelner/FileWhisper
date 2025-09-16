@@ -4,7 +4,7 @@ FRONTEND_URL="http://localhost:3000"
 POLL_INTERVAL=2  # seconds
 
 # Start docker-compose in detached mode
-docker-compose up -d
+docker-compose up --build
 
 echo "Waiting for frontend to be fully ready..."
 

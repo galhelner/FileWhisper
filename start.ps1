@@ -1,5 +1,5 @@
 # Start docker-compose in detached mode
-docker-compose up -d
+docker-compose up --build
 
 # Wait until localhost:3000 responds with HTTP 200
 Write-Host "Waiting for frontend to be fully ready..."
