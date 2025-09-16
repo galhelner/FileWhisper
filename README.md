@@ -62,7 +62,20 @@ git clone https://github.com/galhelner/FileWhisper.git
 cd FileWhisper
 ```
 
-### 2. Run Backend & Web Frontend
+### 2. Configure Environment Variables
+Before starting the app, copy the example environment file:
+```
+cp .env.example .env
+```
+Now edit .env and set your own Gemini API key:
+```
+GEMINI_API_KEY=your_api_key_here
+```
+⚠️ All other values (MONGO_URI, MONGO_DB, JWT_SECRET_KEY, etc.) already work
+for local development with the bundled MongoDB container.
+You only need to change GEMINI_API_KEY.
+
+### 3. Run Backend & Web Frontend
 
 On **Linux / macOS**:
 ```bash
@@ -77,7 +90,7 @@ On **Windows (PowerShell)**:
 ➡️ These scripts will start the backend and frontend using Docker Compose,
 and automatically open your default browser at http://localhost:3000
 
-### 3. Android Frontend App
+### 4. Android Frontend App
 1. Open android-app in Android Studio
 2. Sync Gradle and run on an emulator or device
 3. **Make sure that the backend server is running!** 
