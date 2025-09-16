@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="end"
+    android:padding="8dp"
+    android:orientation="horizontal">
+
+    <!-- Message Bubble -->
+    <TextView
+        android:id="@+id/text_message_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_sent_background"
+        android:text="@string/mock_message"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/image_message_profile"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/profile_icon_dark"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/profile"/>
+</LinearLayout>

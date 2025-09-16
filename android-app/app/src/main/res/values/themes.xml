@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AIPoweredTextAnalyzer" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+
+        <item name="android:statusBarColor">@color/primaryColorDark</item>
+    </style>
+
+    <style name="Theme.AIPoweredTextAnalyzer" parent="Base.Theme.AIPoweredTextAnalyzer"/>
+</resources>
